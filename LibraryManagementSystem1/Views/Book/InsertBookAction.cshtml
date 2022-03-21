@@ -1,0 +1,126 @@
+﻿
+@model LibraryManagementSystem1.Models.BooksModel
+@using LibraryManagementSystem1.Models;
+
+@{
+    ViewBag.Title = "InsertBookAction";
+}
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/bestStyle.css" rel="stylesheet" />
+<link href="~/Content/down1.css" rel="stylesheet" />
+
+<script>
+
+    $(document).ready(function () {
+
+
+        $("#insertBtn").click(function () {
+            InsertBookMethod();
+        });
+
+        $("#resetBtn").click(function () {
+            $("#searchForm")[0].reset()
+        });
+
+        function InsertBookMethod() {
+
+            $.ajax({
+                url: "/Book/InsertBookAction",
+                method: "POST",
+                data: $("#searchForm").serialize(),
+                success: function (data) {
+                    alert("Book Added Successfully...");
+                },
+            });
+        }
+    });
+</script>
+<center style="margin-top:-10px">
+    <h2><b>Add Book</b></h2>
+</center>
+<form id="searchForm" method="POST">
+    <center>
+        <table class="searchTable" style="margin-bottom:10px;">
+            <tr>
+                <td>
+                    <h3>Book Name&nbsp;&nbsp;</h3>
+                </td>
+                <td>
+                    @Html.TextBoxFor(exp => exp.BookName, null, new { @id = "BookName", @placeholder = "Book Name", @class = "textbox btn btn-round btn-outline btn-fb text-left w-100 mb-3" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Book Category&nbsp;&nbsp;</h3>
+                </td>
+                <td>
+                    @Html.DropDownListFor(exp => exp.BookCategoryId, new SelectList(Model.GetCategories, "BookCategoryId", "BookCategory"), "Select Category", new { @id = "DropDownCategory", @class = "btn btn-round btn-outline btn-fb text-left w-100 mb-3" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Book Publisher&nbsp;&nbsp;</h3>
+                </td>
+                <td>
+                    @Html.DropDownListFor(exp => exp.BookPublisherId, new SelectList(Model.GetPublishers, "BookPublisherId", "BookPublisher"), "Select Publisher", new { @id = "DropDownPublisher", @class = "btn btn-round btn-outline btn-fb text-left w-100 mb-3" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Book Quantity&nbsp;&nbsp;</h3>
+                </td>
+                <td>
+                    @Html.TextBoxFor(exp => exp.BookQuantity, null, new { @type = "number", @id = "BookQuantity", @placeholder = "Book Quantity", @class = "textbox btn btn-round btn-outline btn-fb text-left w-100 mb-3" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Is Active&nbsp;&nbsp;</h3>
+                </td>
+                <td>
+                    <label class="custom-control overflow-checkbox">
+                        @Html.CheckBoxFor(exe => exe.IsActive, new { @class = "overflow-control-input", @checked = "" })
+                        <span class="overflow-control-indicator"></span>
+                        <span class="overflow-control-description">IsActive</span>
+                    </label>
+
+                </td>
+            </tr>
+        </table>
+        <div>
+            <br />
+            <table>
+                <tr>
+                    <td style="text-align:right;">
+                        <button type="button" style="margin:10px 0;padding:10px;width:100%;" id="resetBtn" class="resetBtn btn btn-primary btn-round">
+                            Reset
+                        </button>
+                    </td>
+                    <td style="padding:10px;">
+                        <button type="button" style="margin:10px 0;padding:10px;width:100%;" id="insertBtn" class="cancelBtn btn btn-primary btn-round">
+                            Insert Book
+                        </button>
+                    </td>
+                    <td>
+                        <a href="Index">
+                            <input typeof="button" style="margin:10px 0;padding:10px;width:100%;" type="button" id="cancelBtn" value="Cancel" class="cancelBtn btn btn-primary btn-round" />
+                        </a>
+
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </center>
+
+
+    <div class="partial_container" id="partial_table">
+
+    </div>
+    <h3><b id="notFound"></b></h3>
+</form>
+
+
