@@ -1,0 +1,71 @@
+﻿
+.dataShower {
+    width: 1300px;
+}
+
+    .dataShower td {
+        padding-left: 30px;
+        padding-right: 30px;
+        border: none;
+        background-color: #f1f1f1;
+        height: 50px;
+    }
+
+    .dataShower th {
+        padding-left: 30px;
+        padding-right: 30px;
+        border: none;
+        color: white;
+        background-color: black;
+        height: 30px;
+    }
+
+.searchTable {
+    width: 1300px;
+}
+
+    .searchTable td {
+        padding-left: 30px;
+        padding-right: 30px;
+        text-align: center;
+    }
+
+.dropStyle {
+    font-size: 18px;
+    height: 40px;
+    width: 110%;
+    margin-right: 5px;
+    padding: 5px 5px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+.textbox {
+    font-size: 18px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    padding-left: 10px;
+}
+
+
+.partial_container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Btns {
+    width:1300px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.searchBtnTable {
+    padding: 10px;
+    margin: 0 auto;
+}

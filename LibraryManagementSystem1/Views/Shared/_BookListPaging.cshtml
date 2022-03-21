@@ -1,0 +1,97 @@
+﻿@model LibraryManagementSystem1.Models.BooksModel
+@using LibraryManagementSystem1.Models;
+@{
+    ViewBag.Title = "_BookListPaging";
+}
+
+
+<link href="~/Content/myStyle.css" rel="stylesheet" />
+<body>
+    <div>
+        <table class="dataShower">
+            <tr>
+                <th>Book Id</th>
+                <th>Book Name</th>
+                <th>Book Category</th>
+                <th>Book Publisher</th>
+                <th>Book Quantity</th>
+            </tr>
+            @foreach (var i in Model.GetBooks)
+            {
+                <tr>
+                    <td>@i.BookId</td>
+                    <td>@i.BookName</td>
+                    <td>@i.BookCategoryName</td>
+                    <td>@i.BookPublisherName</td>
+                    <td>@i.BookQuantity</td>
+                </tr>
+            }
+        </table>
+
+       
+        <nav class="block-27" style="text-align: center;margin-top: 20px;">
+
+            <ul style="user-select: none;">
+                @if (Model.PageNumber != 1)
+                {
+                    <li >
+                        <a id="pre">&lt;</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a id="pre1">&lt;</a>
+                    </li>
+                }
+
+                @for (var i = 1; i <= Model.TotalPages; i++)
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <li class="active"><a id="btnPage">@i</a></li>
+                    }
+                    else
+                    {
+                        <li><a id="btnPage">@i</a></li>
+                    }
+                }
+
+                @if (Model.PageNumber != Model.TotalPages)
+                {
+                    <li >
+                        <a id="next">&gt;</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a id="next1">&gt;</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</body>
+
+<style>
+    #pre:hover{
+        cursor:pointer;
+    }
+    #btnPage:hover {
+        cursor: pointer;
+    }
+    #next:hover {
+        cursor: pointer;
+    }
+    .pagination {
+        user-select: none;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    body {
+        height: 100%;
+    }
+</style>
