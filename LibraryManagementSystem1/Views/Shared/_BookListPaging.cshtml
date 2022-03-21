@@ -5,6 +5,38 @@
 }
 
 
+<script>
+    //$("#Edit").click(function () {
+    //    debugger;
+    //    //var Id = $("#Edit").val('id');
+    //    $.ajax({
+    //        url: "/Book/InsertBookAction",
+    //        method: "GET",
+    //        //data: { id: Id },
+    //        success: function (data) {
+    //            //console.log(Id);
+    //        }
+    //    });
+    //});
+
+
+    //$("#Edit").click(function () {
+    //    debugger;
+    //    $.ajax({
+    //        url: "/Book/InsertBookAction",
+    //        type: "GET",
+    //        data: { Id: id },
+    //        success: function (data) {
+    //            console.log(data);
+    //        },
+    //        error: function () {
+    //            alert("Dynamic content load failed.");
+    //        }
+    //    });
+    //});
+    
+</script>
+
 <link href="~/Content/myStyle.css" rel="stylesheet" />
 <body>
     <div>
@@ -15,6 +47,7 @@
                 <th>Book Category</th>
                 <th>Book Publisher</th>
                 <th>Book Quantity</th>
+                <th></th>
             </tr>
             @foreach (var i in Model.GetBooks)
             {
@@ -24,6 +57,14 @@
                     <td>@i.BookCategoryName</td>
                     <td>@i.BookPublisherName</td>
                     <td>@i.BookQuantity</td>
+                    <td>
+                        @*<input type="button" id="Edit" value="Edit"/> *@
+                        @*<a  href="#" id="Edit" data-id="@i.BookId">Edit</a>*@
+                        @*@Html.ActionLink("Edit", "InsertBookAction", "Book",new{ id = 1 })
+*@
+                        @*<button id=@i.BookId class="editBtn" value=@i.BookId>Edit</button>*@
+                        @*@Html.ActionLink("Edit", "Edit", new {@class="editBtn", @id=@i.BookId })          *@
+                    </td>
                 </tr>
             }
         </table>
@@ -59,7 +100,7 @@
 
                 @if (Model.PageNumber != Model.TotalPages)
                 {
-                    <li >
+                    <li>
                         <a id="next">&gt;</a>
                     </li>
                 }

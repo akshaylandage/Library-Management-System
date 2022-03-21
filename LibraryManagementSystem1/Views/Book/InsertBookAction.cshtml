@@ -24,8 +24,13 @@
             $("#searchForm")[0].reset()
         });
 
-        function InsertBookMethod() {
+        $("#insertBtn").click(function () {
+            InsertBookMethod();
+        });
 
+        function InsertBookMethod() {
+            var bookid = $("#Edit").val('id');
+            console.log(bookid)
             $.ajax({
                 url: "/Book/InsertBookAction",
                 method: "POST",

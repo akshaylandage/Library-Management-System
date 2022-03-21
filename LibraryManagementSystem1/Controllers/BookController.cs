@@ -28,17 +28,16 @@ namespace LibraryManagementSystem1.Controllers
             Books b = new Books();
             BooksModel bookModel = new BooksModel();
 
-            bookModel.GetBooks = b.GetList();
             bookModel.GetCategories = b.GetCategoryList();
             bookModel.GetPublishers = b.GetPublisherList();
-            bookModel.TotalCount = b.TotalCount;
             return View(bookModel);
         }
 
         [HttpPost]
-        public ActionResult InsertBookAction( BooksModel booksModel)
+        public ActionResult InsertBookAction(BooksModel booksModel)
         {
             Books b = new Books();
+            
             b.BookName = booksModel.BookName;
             b.BookCategoryId = booksModel.BookCategoryId;
             b.BookPublisherId = booksModel.BookPublisherId;
@@ -48,6 +47,7 @@ namespace LibraryManagementSystem1.Controllers
 
             booksModel.GetCategories = b.GetCategoryList();
             booksModel.GetPublishers = b.GetPublisherList();
+
             b.Insert();
 
             return View(booksModel);

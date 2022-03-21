@@ -68,6 +68,20 @@
             getSearchResult();
         });
 
+@*
+        $("#Edit").click(function () {
+            debugger;
+            $.ajax({
+                url: "/Books/Insertdata",
+                type: "GET",
+                data: { Id: id },
+                success: function (data) {
+                    console.log(Id);
+                }
+                
+            });
+        });
+*@
         function getSearchResult() {
 
             $.ajax({
