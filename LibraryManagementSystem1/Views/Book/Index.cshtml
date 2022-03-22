@@ -68,20 +68,6 @@
             getSearchResult();
         });
 
-@*
-        $("#Edit").click(function () {
-            debugger;
-            $.ajax({
-                url: "/Books/Insertdata",
-                type: "GET",
-                data: { Id: id },
-                success: function (data) {
-                    console.log(Id);
-                }
-                
-            });
-        });
-*@
         function getSearchResult() {
 
             $.ajax({
@@ -147,15 +133,13 @@
 
     </center>
     <div style="float:right">
-        <a href="InsertBookAction">
-            <input typeof="button" type="button" id="insertBtn" class="searchBtn btn btn-primary btn-round" value="Insert Book" />
-        </a>
-
-    </div>
+            <a class="btn btn-primary btn-round" href="@Url.Action("InsertBookAction","Book",new {id=0})">Insert Book</a>
+        </div>
     <div class="partial_container" id="partial_table">
 
     </div>
     <h3><b id="notFound"></b></h3>
+
 </form>
 
 

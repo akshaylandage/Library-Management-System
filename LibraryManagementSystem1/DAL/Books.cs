@@ -44,6 +44,7 @@ public class Books
 
     #region Properties
 
+    public int Id { get; set; } = 0;
     public int PageLength { get; set; } = 10;
 
     public int PageNumber { get; set; } = 1;
@@ -91,6 +92,7 @@ public class Books
 
                     this.BookCategoryId = Convert.ToInt32(dt.Rows[0]["BookCategoryId"]);
                     this.BookPublisherId = Convert.ToInt32(dt.Rows[0]["BookPublisherId"]);
+                    this.BookQuantity = Convert.ToInt32(dt.Rows[0]["BookQuantity"]);
 
                     this.IsActive = Convert.ToBoolean(dt.Rows[0]["IsActive"]);
                     this.CreatedBy = Convert.ToInt32(dt.Rows[0]["CreatedBy"]);
@@ -240,7 +242,7 @@ public class Books
     /// <returns>True if Update operation is successful; Else False.</returns>
 
 
-    private bool Update()
+    public bool Update()
     {
         try
         {
@@ -272,6 +274,14 @@ public class Books
             {
                 this.db.AddInParameter(com, "BookPublisherId", DbType.Int32, DBNull.Value);
             }
+            if (this.BookQuantity > 0)
+            {
+                this.db.AddInParameter(com, "BookQuantity", DbType.Int32, this.BookQuantity);
+            }
+            else
+            {
+                this.db.AddInParameter(com, "BookQuantity", DbType.Int32, DBNull.Value);
+            }
             ///////////////////////////////////////////////////////////////////////////
 
             this.db.AddInParameter(com, "IsActive", DbType.Boolean, this.IsActive);
@@ -281,32 +291,32 @@ public class Books
             }
             else
             {
-                this.db.AddInParameter(com, "CreatedBy", DbType.Int32, DBNull.Value);
+                this.db.AddInParameter(com, "CreatedBy", DbType.Int32, 1);
             }
-            if (this.CreatedOn > DateTime.MinValue)
+           /* if (this.CreatedOn > DateTime.MinValue)
             {
                 this.db.AddInParameter(com, "CreatedOn", DbType.DateTime, this.CreatedOn);
             }
             else
             {
                 this.db.AddInParameter(com, "CreatedOn", DbType.DateTime, DBNull.Value);
-            }
+            }*/
             if (this.ModifiedBy > 0)
             {
                 this.db.AddInParameter(com, "ModifiedBy", DbType.Int32, this.ModifiedBy);
             }
             else
             {
-                this.db.AddInParameter(com, "ModifiedBy", DbType.Int32, DBNull.Value);
+                this.db.AddInParameter(com, "ModifiedBy", DbType.Int32, 1);
             }
-            if (this.ModifiedOn > DateTime.MinValue)
+            /*if (this.ModifiedOn > DateTime.MinValue)
             {
                 this.db.AddInParameter(com, "ModifiedOn", DbType.DateTime, this.ModifiedOn);
             }
             else
             {
                 this.db.AddInParameter(com, "ModifiedOn", DbType.DateTime, DBNull.Value);
-            }
+            }*/
             this.db.ExecuteNonQuery(com);
         }
         catch (Exception ex)

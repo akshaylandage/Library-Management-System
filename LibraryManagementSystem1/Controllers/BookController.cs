@@ -15,7 +15,6 @@ namespace LibraryManagementSystem1.Controllers
             Books b = new Books();
             BooksModel bookModel = new BooksModel();
 
-
             bookModel.GetBooks = b.GetList();
             bookModel.GetCategories = b.GetCategoryList();
             bookModel.GetPublishers = b.GetPublisherList();
@@ -23,33 +22,62 @@ namespace LibraryManagementSystem1.Controllers
             return View(bookModel);
         }
 
-        public ActionResult InsertBookAction()
+        public ActionResult InsertBookAction(int id)
         {
             Books b = new Books();
             BooksModel bookModel = new BooksModel();
 
             bookModel.GetCategories = b.GetCategoryList();
             bookModel.GetPublishers = b.GetPublisherList();
+            if (id > 0)
+            {
+                b.BookId = id;
+                bookModel.BookId = id;
+                b.Load();
+                bookModel.IsActive = b.IsActive;
+                bookModel.BookName = b.BookName;
+                bookModel.BookQuantity = b.BookQuantity;
+                foreach (BooksModel i in bookModel.GetCategories)
+                {
+                    if (b.BookCategoryId == i.BookCategoryId)
+                    {
+                        bookModel.BookCategoryId = i.BookCategoryId;
+                        bookModel.BookCategoryName = i.BookCategory;
+                        break;
+                    }
+                }
+                foreach (BooksModel i in bookModel.GetPublishers)
+                {
+                    if (b.BookPublisherId == i.BookPublisherId)
+                    {
+                        bookModel.BookPublisherId= i.BookPublisherId;
+                        bookModel.BookPublisherName = i.BookPublisher;
+                        break;
+                    }
+                }
+                bookModel.ButtonName = "Update"; 
+            }
+            else
+            {
+                bookModel.ButtonName = "Insert"; 
+            }
             return View(bookModel);
         }
+
 
         [HttpPost]
         public ActionResult InsertBookAction(BooksModel booksModel)
         {
             Books b = new Books();
-            
+            b.BookId = booksModel.BookId;
             b.BookName = booksModel.BookName;
             b.BookCategoryId = booksModel.BookCategoryId;
             b.BookPublisherId = booksModel.BookPublisherId;
             b.BookQuantity = booksModel.BookQuantity;
             b.IsActive = booksModel.IsActive;
-
-
             booksModel.GetCategories = b.GetCategoryList();
             booksModel.GetPublishers = b.GetPublisherList();
-
-            b.Insert();
-
+            b.Save();
             return View(booksModel);
         }
 
@@ -67,10 +95,10 @@ namespace LibraryManagementSystem1.Controllers
             booksModel.GetCategories = b.GetCategoryList();
             booksModel.GetPublishers = b.GetPublisherList();
             booksModel.TotalCount = b.TotalCount;
-            
-            double t =(double)booksModel.TotalCount / (double)booksModel.PageLength;
+
+            double t = (double)booksModel.TotalCount / (double)booksModel.PageLength;
             int n = (int)t;
-            if (n==t)
+            if (n == t)
             {
                 booksModel.TotalPages = n;
             }

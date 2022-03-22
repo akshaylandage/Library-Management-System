@@ -9,6 +9,9 @@ namespace LibraryManagementSystem1.Models
     {
         #region Properties
 
+        public string ButtonName { get; set; }
+        public int Id { get; set; } = 0;
+
         public int TotalPages { get; set; }
         public int BookId { get; set; }
 
