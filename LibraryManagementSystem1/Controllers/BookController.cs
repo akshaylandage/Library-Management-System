@@ -37,24 +37,8 @@ namespace LibraryManagementSystem1.Controllers
                 bookModel.IsActive = b.IsActive;
                 bookModel.BookName = b.BookName;
                 bookModel.BookQuantity = b.BookQuantity;
-                foreach (BooksModel i in bookModel.GetCategories)
-                {
-                    if (b.BookCategoryId == i.BookCategoryId)
-                    {
-                        bookModel.BookCategoryId = i.BookCategoryId;
-                        bookModel.BookCategoryName = i.BookCategory;
-                        break;
-                    }
-                }
-                foreach (BooksModel i in bookModel.GetPublishers)
-                {
-                    if (b.BookPublisherId == i.BookPublisherId)
-                    {
-                        bookModel.BookPublisherId= i.BookPublisherId;
-                        bookModel.BookPublisherName = i.BookPublisher;
-                        break;
-                    }
-                }
+                bookModel.BookCategoryId = b.BookCategoryId;
+                bookModel.BookPublisherId = b.BookPublisherId;
                 bookModel.ButtonName = "Update"; 
             }
             else
@@ -75,10 +59,8 @@ namespace LibraryManagementSystem1.Controllers
             b.BookPublisherId = booksModel.BookPublisherId;
             b.BookQuantity = booksModel.BookQuantity;
             b.IsActive = booksModel.IsActive;
-            booksModel.GetCategories = b.GetCategoryList();
-            booksModel.GetPublishers = b.GetPublisherList();
             b.Save();
-            return View(booksModel);
+            return RedirectToAction("Index","Book");
         }
 
         [HttpPost]

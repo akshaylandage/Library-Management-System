@@ -25,19 +25,8 @@
         });
 
         $("#Update").click(function () {
-            UpdateBookMethod();
+            InsertBookMethod();
         });
-
-        function UpdateBookMethod() {
-            $.ajax({
-                url: "/Book/InsertBookAction",
-                method: "POST",
-                data: $("#searchForm").serialize(),
-                success: function (data) {
-                    alert("Book Update Successfully...");
-                },
-            });
-        }
 
         function InsertBookMethod() {
             
@@ -46,7 +35,13 @@
                 method: "POST",
                 data: $("#searchForm").serialize(),
                 success: function (data) {
-                    alert("Book Added Successfully...");
+                    debugger;
+                    if ($("#Update").val() == "Update") {
+                        alert("Book Update Successfully...");
+                    }
+                    else {
+                        alert("Book Added Successfully...");
+                    }
                 },
             });
         }
@@ -132,13 +127,11 @@
                     @if (Model.ButtonName != "Update")
                     {
                         <td style="text-align:right;">
-                            <button type="button" style="margin:10px 0;padding:10px;width:100%;" id="resetBtn" class="resetBtn btn btn-primary btn-round">
-                                Reset
-                            </button>
+                            <button type="button" style="margin:10px 0;padding:10px;width:100%;" id="resetBtn" class="resetBtn btn btn-primary btn-round">Reset</button>
                         </td>
                     }
                     <td style="padding:10px;">
-                        <button type="button" style="margin:10px 0;padding:10px;width:100%;" id="@Model.ButtonName" class="insertBtn btn btn-primary btn-round">
+                        <button type="submit" style="margin:10px 0;padding:10px;width:100%;" value="@Model.ButtonName" id="@Model.ButtonName" class="insertBtn btn btn-primary btn-round">
                             @Model.ButtonName
                         </button>
                     </td>
